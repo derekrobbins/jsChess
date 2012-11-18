@@ -23,7 +23,7 @@ DSR.Chess = function () {
 			};
 
 			this.setPiece = function (piece) {
-				updateBoard({
+				updateBoardView({
 					from: properties.piece ? properties.piece.getPosition() : '',
 					to: piece.getPosition(),
 					piece: piece.getHTML()
@@ -172,7 +172,7 @@ DSR.Chess = function () {
 		$('body').append(html);
 	};
 
-	var updateBoard = function (oArgs) {
+	var updateBoardView = function (oArgs) {
 		if (oArgs.from != '') {
 			$('#' + oArgs.from).empty()
 		}
