@@ -1,0 +1,83 @@
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	width: 50px;
+	height: 50px;
+	position: relative;
+}
+
+.board {
+	border: 5px solid #000;
+	width: 400px;
+}
+
+.row {
+	width: 400px;
+	border: none;
+}
+
+.row ul li {
+	display: inline-block;
+}
+
+.black {
+	background-color: #6B9;
+}
+
+.piece {
+	position: absolute;
+	font-size: 50px;
+	width: 50px;
+	text-align: center;
+}
+
+.white-rook:after {
+	content: '\2656';
+}
+
+.white-knight:after {
+	content: '\2658';
+}
+
+.white-bishop:after {
+	content: '\2657';
+}
+
+.white-queen:after {
+	content: '\2655';
+}
+
+.white-king:after {
+	content: '\2654';
+}
+
+.white-pawn:after {
+	content: '\2659';
+}
+
+.black-rook:after {
+	content: '\265C';
+}
+
+.black-knight:after {
+	content: '\265E';
+}
+
+.black-bishop:after {
+	content: '\265D';
+}
+
+.black-queen:after {
+	content: '\265B';
+}
+
+.black-king:after {
+	content: '\265A';
+}
+
+.black-pawn:after {
+	content: '\265F';
+}
