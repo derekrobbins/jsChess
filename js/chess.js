@@ -151,6 +151,21 @@ DSR.Chess = function () {
 		drawBoard();
 		var black = new Player('black');
 		var white = new Player('white');
+		var from = 0;
+
+		$('li:not(.row)').live('click', function (e) {
+			// must verify move is legal
+			var loc = e.currentTarget.id,
+				hasPiece = board.squares[loc].getPiece();
+
+			if (from) {
+				updateBoardView({from:from, to:loc});
+				from = 0;
+			} else if (hasPiece) {
+				from = loc;
+			}
+			
+		});
 	};
 
 	var drawBoard = function () {
@@ -177,7 +192,7 @@ DSR.Chess = function () {
 			$('#' + oArgs.from).empty()
 		}
 
-		$('#' + oArgs.to).html(oArgs.piece);
+		$('#' + oArgs.to).html(oArgs.piece || board.squares[oArgs.from].getPiece().getHTML());
 	};
 
 	setup();
