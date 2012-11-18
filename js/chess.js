@@ -10,16 +10,26 @@ DSR.Chess = function () {
 
 	var board = (function () {
 		var x = 0,
-			y = 0,
-			properties = {};
+			y = 0;
 
 		var Square = function (name) {
+			var properties = {
+				piece: '',
+				attackers: []
+			};
+
 			this.getName = function () {
 				return name;
 			};
 
-			this.setPiece = function (something) {
-				properties.piece = something;
+			this.setPiece = function (piece) {
+				updateBoard({
+					from: properties.piece ? properties.piece.getPosition() : '',
+					to: piece.getPosition(),
+					piece: piece.getHTML()
+				});
+
+				properties.piece = piece;
 			};
 
 			this.getPiece = function () {
@@ -31,7 +41,7 @@ DSR.Chess = function () {
 			};
 
 			this.getAttackers = function () {
-
+				return properties.attackers;
 			};
 		};
 
@@ -123,24 +133,18 @@ DSR.Chess = function () {
 		this.setPosition = function (pos) {
 			position = pos.column  + pos.row;
 
-			board.squares[position].setPiece({
-				color: this.getColor(),
-				type: this.getType()
-			});
-
-			// this needs to be moved into a view function
-			$('#'+position).html(html);
+			board.squares[position].setPiece(this);
 		};
 
 		this.getPosition = function () {
 			return position;
 		};
 
+		this.getHTML = function () {
+			return html;
+		};
+
 		this.setPosition(oArgs.position);
-	};
-
-	var Pawn = function () {
-
 	};
 
 	var setup = function () {
@@ -166,6 +170,14 @@ DSR.Chess = function () {
 		html += '</ul>';
 
 		$('body').append(html);
+	};
+
+	var updateBoard = function (oArgs) {
+		if (oArgs.from != '') {
+			$('#' + oArgs.from).empty()
+		}
+
+		$('#' + oArgs.to).html(oArgs.piece);
 	};
 
 	setup();
