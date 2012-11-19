@@ -2,116 +2,156 @@ if (typeof(window.DSR) === 'undefined') {
 	window.DSR = {};
 }
 
-DSR.Chess = function () {
-	// Converts a numbered column (1-8) to its letter equivilent
-	var getColumn = function (num) {
+DSR.Chess = {
+	init: function () {
+		this.Model.init();
+		this.View.init();
+		this.Controller.init();
+	},
+
+	getColumn: function (num) {
 		return String.fromCharCode(num + 96);
-	};
+	},
 
-	var board = (function () {
-		var x = 0,
-			y = 0;
-
-		var Square = function (name) {
-			var properties = {
-				piece: '',
-				attackers: []
-			};
-
-			this.getName = function () {
-				return name;
-			};
-
-			this.setPiece = function (piece) {
-				updateBoardView({
-					from: properties.piece ? properties.piece.getPosition() : '',
-					to: piece.getPosition(),
-					piece: piece.getHTML()
-				});
-
-				properties.piece = piece;
-			};
-
-			this.getPiece = function () {
-				return properties.piece;
-			};
-
-			this.clearPiece = function () {
-				properties.piece = '';
-			};
-
-			this.getAttackers = function () {
-				return properties.attackers;
-			};
+	nameToNum: function (name) {
+		return {
+			x: name.charCodeAt(0) - 97,
+			y: name.charCodeAt(1) - 49
 		};
+	},
 
+	fireMovePiece: function (piece, to) {
+		var e = document.createEvent("UIEvents");
+		e.initEvent('piece moved', true, true);
+		e.piece = piece;
+		e.to = to || 0;
+		document.body.dispatchEvent(e);
+	},
+
+	subscribeMovePiece: function (func) {
+		window.addEventListener('piece moved', func, false);
+	},
+
+	Model: {},
+	View: {},
+	Controller: {}
+};
+
+DSR.Chess.Model = (function () {
+	var model = {},
+		x = 0,
+		y = 0;
+
+	model.init = function () {
 		// Set up board data structure
-		this.squares = {};
+		model.board = [];
 		for (x = 0; x < 8; x++) {
+			model.board.push([]);
 			for (y = 0; y < 8; y++) {
-				var name = getColumn(x + 1);
+				var name = DSR.Chess.getColumn(x + 1);
 				name = name.concat(y + 1);
-				this.squares[name] = new Square(name);
+				model.board[x].push(new Square(name));
 			}
 		}
 
-		return this;
-	})();
+		// Set up players
+		$('button').click(function () {
+			$('.modalShade, .window').hide();
+			model.players = [];
+			model.players.push(new Player('w'));
+			model.players.push(new Player('bl'));
+		});
+	};
 
 	var Player = function (color) {
-		this.getColor = function () {return color};
+		this.color = color;
+	};
+
+
+	Player.prototype.init = function () {
+			var pieces = ['r','n','b','q','k','b','n','r'],
+				row = this.getColor() == 'w' ? 1 : 8,
+				column = 1;
+
+			// Create power pieces
+			for (; column <= 8; column++) {
+				new Piece({
+					color: this.getColor(),
+					type: pieces[column-1],
+					position: {
+						column: getColumn(column),
+						row: row
+					}
+				});
+			}
+
+			// Create pawns
+			for (column = 1; column <= 8; column++) {
+				new Piece({
+					color: this.getColor(),
+					type: 'p',
+					position: {
+						column: getColumn(column),
+						row: (row - 1) ? 7 : 2
+					}
+				});
+			}
+		};
+
+	var Square = function (name) {
+		this.name = name;
+		this.attackers = [];
+		this.contains = 0;
+		this.piece = 0;
+	};
+
+	Square.prototype = {
+		setPiece: function (piece) {
+			from = piece.position;
+			this.piece = piece;
+
+			DSR.Chess.fireMovePiece(piece, this.name);
+		},
+
+		clearPiece: function () {
+			this.piece = '';
+		},
+
+		getAttackers: function () {
+			return properties.attackers;
+		},
+	};
+
+	var Player = function (color) {
+		this.color = color;
 
 		this.init();
 	};
 
 	Player.prototype.init = function () {
-		var pieces = ['rook', 'knight', 'bishop'],
-			row = this.getColor() == 'white' ? 1 : 8,
+		var pieces = ['r','n','b','q','k','b','n','r'],
+			row = this.color == 'w' ? 1 : 8,
 			column = 1;
 
-		new Piece({
-			color: this.getColor(),
-			type: 'queen',
-			position: {
-				column: 'd',
-				row: row
-			}
-		});
-		new Piece({
-			color: this.getColor(),
-			type: 'king',
-			position: {
-				column: 'e',
-				row: row
-			}
-		});
-
-		for (; column < 4; column++) {
+		// Create power pieces
+		for (; column <= 8; column++) {
 			new Piece({
-				color: this.getColor(),
+				color: this.color,
 				type: pieces[column-1],
 				position: {
-					column: getColumn(column),
-					row: row
-				}
-			});
-
-			new Piece({
-				color: this.getColor(),
-				type: pieces[column-1],
-				position: {
-					column: getColumn(9 - column),
+					column: DSR.Chess.getColumn(column),
 					row: row
 				}
 			});
 		}
 
+		// Create pawns
 		for (column = 1; column <= 8; column++) {
 			new Piece({
-				color: this.getColor(),
-				type: 'pawn',
+				color: this.color,
+				type: 'p',
 				position: {
-					column: getColumn(column),
+					column: DSR.Chess.getColumn(column),
 					row: (row - 1) ? 7 : 2
 				}
 			});
@@ -119,56 +159,67 @@ DSR.Chess = function () {
 	};
 
 	var Piece = function (oArgs) {
-		var position,
-			html = '<div class="piece ' + oArgs.color + "-" + oArgs.type + '"></div>';
+		this.position = oArgs.position;
+		this.html = '<div class="piece ' + oArgs.color + " " + oArgs.type + '"></div>';
+		this.type = oArgs.type;
+		this.color = oArgs.color;
 
-		this.getColor = function () {
-			return oArgs.color;
-		};
+		this.setPosition(this.position);
+	};
 
-		this.getType = function () {
-			return oArgs.type;
-		};
+	Piece.prototype = {
 
-		this.setPosition = function (pos) {
+		setPosition: function (pos) {
 			position = pos.column  + pos.row;
+			model.board[pos.column.charCodeAt(0) - 97][pos.row - 1].setPiece(this);
+		},
 
-			board.squares[position].setPiece(this);
-		};
+		checkMove: function (to) {
+			var from = this.getPosition(),
+				deltaX = Math.abs(to.charCodeAt(0) - from.charCodeAt(0)),
+				deltaY = to.charCodeAt(1) - from.charCodeAt(1),
+				direction = color == 'w' ? 1 : -1,
+				startRow = direction ? 2 : 7;
 
-		this.getPosition = function () {
-			return position;
-		};
+			if (type == 'p') {
+				if (deltaY == direction) {
+					if (!deltaX) {
+						//legal pawn move
+						return 1;
+					} else if (deltaX == 1 && board.squares[to].getPiece()) {
+						// capture
+						return 1;
+					}
+				// First move can be two squares
+				} else if (!deltaX &&  (from.charCodeAt(1) - 53) == startRow && deltaY == 2 * direction) {
+					return 1;
+				}
+			} else if (type = 'r') {
+				if (!deltaX || !deltaY) {
 
-		this.getHTML = function () {
-			return html;
-		};
-
-		this.setPosition(oArgs.position);
-	};
-
-	var setup = function () {
-		drawBoard();
-		var black = new Player('black');
-		var white = new Player('white');
-		var from = 0;
-
-		$('li:not(.row)').live('click', function (e) {
-			// must verify move is legal
-			var loc = e.currentTarget.id,
-				hasPiece = board.squares[loc].getPiece();
-
-			if (from) {
-				updateBoardView({from:from, to:loc});
-				from = 0;
-			} else if (hasPiece) {
-				from = loc;
+				}
 			}
-			
-		});
+		}
 	};
 
-	var drawBoard = function () {
+	return model;
+})();
+
+DSR.Chess.View = (function () {
+	var view = {};
+
+	var updateBoardView = function (e) {
+		var fromId = e.piece.position.column + e.piece.position.row,
+			toId = e.to;
+
+		if (fromId) {
+			$('#'+fromId).empty();
+		}
+
+		$('#'+toId).html(e.piece.html);
+	}
+
+	view.init = function () {
 		var x = 8,
 			y,
 			html = '<ul class="board">';
@@ -177,7 +228,7 @@ DSR.Chess = function () {
 			html += '<li class="row"><ul>';
 			for (y = 1; y <= 8; y++) {
 				color = ((y + x % 2) % 2) ? 'white' : 'black';
-				html += '<li id="' + getColumn(y) + x + '" class="' + color + '"></li>'
+				html += '<li id="' + DSR.Chess.getColumn(y) + x + '" class="' + color + '"></li>'
 			}
 			html += '</ul></li>';
 		}
@@ -187,16 +238,43 @@ DSR.Chess = function () {
 		$('body').append(html);
 	};
 
-	var updateBoardView = function (oArgs) {
-		if (oArgs.from != '') {
-			$('#' + oArgs.from).empty()
-		}
+	DSR.Chess.subscribeMovePiece(updateBoardView);
 
-		$('#' + oArgs.to).html(oArgs.piece || board.squares[oArgs.from].getPiece().getHTML());
+	return view;
+})();
+
+DSR.Chess.Controller = (function () {
+	var controller = {};
+
+	controller.init = function () {
+		$('li.row li').click(listenClick);
 	};
 
-	setup();
-};
+	var listenClick = function (e) {
+		if (!controller.piece && e.currentTarget.innerHTML == '') return;
+
+		var board = DSR.Chess.Model.board,
+			name = e.currentTarget.id;
+
+		if (controller.piece) {
+			var to = DSR.Chess.nameToNum(name);
+				dest = board[to.x][to.y];
+
+			if (dest.piece.color != controller.piece.color) {
+				board[to.x][to.y].setPiece(controller.piece);
+				board[controller.from.x][controller.from.y].clearPiece();
+			}
+			
+			controller.piece = 0;
+		} else {
+			controller.from = DSR.Chess.nameToNum(name);
+			controller.piece = board[controller.from.x][controller.from.y].piece;
+		}
+	};
+
+	return controller;
+})();
+
 $().ready(function () {
-	new DSR.Chess();
+	DSR.Chess.init();
 });
