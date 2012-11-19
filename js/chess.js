@@ -20,11 +20,11 @@ DSR.Chess = {
 		};
 	},
 
-	fireMovePiece: function (piece, to) {
+	fireMovePiece: function (piece, from) {
 		var e = document.createEvent("UIEvents");
 		e.initEvent('piece moved', true, true);
 		e.piece = piece;
-		e.to = to || 0;
+		e.from = from || 0;
 		document.body.dispatchEvent(e);
 	},
 
@@ -65,35 +65,32 @@ DSR.Chess.Model = (function () {
 
 	var Player = function (color) {
 		this.color = color;
+
+		this.init();
 	};
 
 
 	Player.prototype.init = function () {
 			var pieces = ['r','n','b','q','k','b','n','r'],
-				row = this.getColor() == 'w' ? 1 : 8,
+				row = this.color == 'w' ? 1 : 8,
 				column = 1;
 
 			// Create power pieces
 			for (; column <= 8; column++) {
 				new Piece({
-					color: this.getColor(),
+					color: this.color,
 					type: pieces[column-1],
-					position: {
-						column: getColumn(column),
-						row: row
-					}
+					position: DSR.Chess.getColumn(column) + row
 				});
 			}
 
 			// Create pawns
+			row = this.color == 'w' ? 2 : 7
 			for (column = 1; column <= 8; column++) {
 				new Piece({
-					color: this.getColor(),
+					color: this.color,
 					type: 'p',
-					position: {
-						column: getColumn(column),
-						row: (row - 1) ? 7 : 2
-					}
+					position: DSR.Chess.getColumn(column) + row
 				});
 			}
 		};
@@ -109,8 +106,9 @@ DSR.Chess.Model = (function () {
 		setPiece: function (piece) {
 			from = piece.position;
 			this.piece = piece;
+			this.piece.position = this.name;
 
-			DSR.Chess.fireMovePiece(piece, this.name);
+			DSR.Chess.fireMovePiece(piece, from);
 		},
 
 		clearPiece: function () {
@@ -120,42 +118,6 @@ DSR.Chess.Model = (function () {
 		getAttackers: function () {
 			return properties.attackers;
 		},
-	};
-
-	var Player = function (color) {
-		this.color = color;
-
-		this.init();
-	};
-
-	Player.prototype.init = function () {
-		var pieces = ['r','n','b','q','k','b','n','r'],
-			row = this.color == 'w' ? 1 : 8,
-			column = 1;
-
-		// Create power pieces
-		for (; column <= 8; column++) {
-			new Piece({
-				color: this.color,
-				type: pieces[column-1],
-				position: {
-					column: DSR.Chess.getColumn(column),
-					row: row
-				}
-			});
-		}
-
-		// Create pawns
-		for (column = 1; column <= 8; column++) {
-			new Piece({
-				color: this.color,
-				type: 'p',
-				position: {
-					column: DSR.Chess.getColumn(column),
-					row: (row - 1) ? 7 : 2
-				}
-			});
-		}
 	};
 
 	var Piece = function (oArgs) {
@@ -170,8 +132,7 @@ DSR.Chess.Model = (function () {
 	Piece.prototype = {
 
 		setPosition: function (pos) {
-			position = pos.column  + pos.row;
-			model.board[pos.column.charCodeAt(0) - 97][pos.row - 1].setPiece(this);
+			model.board[pos.charCodeAt(0) - 97][pos.charCodeAt(1) - 49].setPiece(this);
 		},
 
 		checkMove: function (to) {
@@ -209,8 +170,8 @@ DSR.Chess.View = (function () {
 	var view = {};
 
 	var updateBoardView = function (e) {
-		var fromId = e.piece.position.column + e.piece.position.row,
-			toId = e.to;
+		var fromId = e.from,
+			toId = e.piece.position;
 
 		if (fromId) {
 			$('#'+fromId).empty();
@@ -250,6 +211,14 @@ DSR.Chess.Controller = (function () {
 		$('li.row li').click(listenClick);
 	};
 
+	var validateMove = function (type, from, to) {
+		var deltaX = from.x - to.x,
+			deltaY = from.y - to.y;
+		if (type == 'n') {
+			if (deltaY * deltaY + deltaX * deltaX == 5) return 1;
+		}
+	};
+
 	var listenClick = function (e) {
 		if (!controller.piece && e.currentTarget.innerHTML == '') return;
 
@@ -260,7 +229,7 @@ DSR.Chess.Controller = (function () {
 			var to = DSR.Chess.nameToNum(name);
 				dest = board[to.x][to.y];
 
-			if (dest.piece.color != controller.piece.color) {
+			if (dest.piece.color != controller.piece.color && validateMove(controller.piece.type, controller.from, to)) {
 				board[to.x][to.y].setPiece(controller.piece);
 				board[controller.from.x][controller.from.y].clearPiece();
 			}
