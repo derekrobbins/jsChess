@@ -31,10 +31,6 @@ DSR.Chess = {
 	subscribeMovePiece: function (func) {
 		window.addEventListener('piece moved', func, false);
 	},
-
-	Model: {},
-	View: {},
-	Controller: {}
 };
 
 DSR.Chess.Model = (function () {
