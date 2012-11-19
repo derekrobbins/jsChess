@@ -123,33 +123,6 @@ DSR.Chess.Model = (function () {
 		setPosition: function (pos) {
 			model.board[pos.charCodeAt(0) - 97][pos.charCodeAt(1) - 49].setPiece(this);
 		},
-
-		checkMove: function (to) {
-			var from = this.getPosition(),
-				deltaX = Math.abs(to.charCodeAt(0) - from.charCodeAt(0)),
-				deltaY = to.charCodeAt(1) - from.charCodeAt(1),
-				direction = color == 'w' ? 1 : -1,
-				startRow = direction ? 2 : 7;
-
-			if (type == 'p') {
-				if (deltaY == direction) {
-					if (!deltaX) {
-						//legal pawn move
-						return 1;
-					} else if (deltaX == 1 && board.squares[to].getPiece()) {
-						// capture
-						return 1;
-					}
-				// First move can be two squares
-				} else if (!deltaX &&  (from.charCodeAt(1) - 53) == startRow && deltaY == 2 * direction) {
-					return 1;
-				}
-			} else if (type = 'r') {
-				if (!deltaX || !deltaY) {
-
-				}
-			}
-		}
 	};
 
 	return model;
