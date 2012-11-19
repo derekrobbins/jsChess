@@ -112,7 +112,7 @@ DSR.Chess.Model = (function () {
 		},
 
 		clearPiece: function () {
-			// Add event to clear view square on clearPiece
+			// ***ADD: event to clear view square on clearPiece, needed for en passant ***
 			this.piece = 0;
 		},
 
@@ -264,7 +264,9 @@ DSR.Chess.Controller = (function () {
 				// Standard movement
 				if (!deltaX && !capturePiece) {
 					piece.moved += 1;
-					console.log(piece.moved);
+					if (piece.moved == 6) {
+						// ***ADD: Fire event for promotion***
+					}
 					return 1;
 				// Capture movement
 				} else if (absX == 1 && capturePiece) {
@@ -302,6 +304,7 @@ DSR.Chess.Controller = (function () {
 
 		// King Movement
 		} else if (piece.type == 'k') {
+			// ***ADD: test for attacked squares***
 			if (absX <= 1 && absY <= 1) {
 				piece.moved = 1;
 				return 1;
