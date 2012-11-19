@@ -49,24 +49,16 @@ DSR.Chess.Model = (function () {
 				model.board[x].push(new Square(name));
 			}
 		}
-
-		// Set up players
-		$('button').click(function () {
-			$('.modalShade, .window').hide();
-			model.players = [];
-			model.players.push(new Player('w'));
-			model.players.push(new Player('bl'));
-		});
 	};
 
-	var Player = function (color) {
+	model.Player = function (color) {
 		this.color = color;
 
 		this.init();
 	};
 
 
-	Player.prototype.init = function () {
+	model.Player.prototype.init = function () {
 			var pieces = ['r','n','b','q','k','b','n','r'],
 				row = this.color == 'w' ? 1 : 8,
 				column = 1;
@@ -205,6 +197,15 @@ DSR.Chess.Controller = (function () {
 	var controller = {};
 
 	controller.init = function () {
+		var model = DSR.Chess.Model;
+		// Set up players
+		$('button').click(function () {
+			$('.modalShade, .window').hide();
+			model.players = [];
+			model.players.push(new model.Player('w'));
+			model.players.push(new model.Player('bl'));
+		});
+
 		$('li.row li').click(listenClick);
 	};
 
