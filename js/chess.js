@@ -112,7 +112,7 @@ DSR.Chess.Model = (function () {
 		},
 
 		clearPiece: function () {
-			this.piece = '';
+			this.piece = 0;
 		},
 
 		getAttackers: function () {
@@ -211,12 +211,93 @@ DSR.Chess.Controller = (function () {
 		$('li.row li').click(listenClick);
 	};
 
-	var validateMove = function (type, from, to) {
-		var deltaX = from.x - to.x,
-			deltaY = from.y - to.y;
-		if (type == 'n') {
+	var validateMove = function (piece, from, to) {
+		var deltaX = to.x - from.x,
+			deltaY = to.y - from.y,
+			absX = Math.abs(deltaX),
+			absY = Math.abs(deltaY),
+			xDir = deltaX / absX,
+			yDir = deltaY / absY,
+			direction = piece.color == 'w' ? 1 : -1,
+			board = DSR.Chess.Model.board,
+			capturePiece = board[to.x][to.y].piece,
+			index = 1;
+
+		// Pawn movement
+		if (piece.type == 'p') {
+			if (deltaY == direction) {
+				// Standard movement
+				if (!deltaX && !capturePiece) {
+					piece.moved = 1;
+					return 1;
+				// Capture movement
+				} else if (absX == 1 && capturePiece) {
+					piece.moved = 1;
+					return 1;
+				}
+			// Special case first move pawn can move two spaces
+			} else if (deltaY == direction * 2 && !deltaX && !piece.moved) {
+				piece.moved = 1;
+				return 1;
+			}
+		// Rook Movement
+		} else if (piece.type == 'r') {
+			if (!deltaX || !deltaY) {
+				if (deltaX) {
+					for (index = 1; index < absX; index++) {
+						if (board[from.x+index*xDir][from.y].piece) return 0;
+					}
+				} else {
+					for (index = 1; index < absY; index++) {
+						if (board[from.x][from.y+index*yDir].piece) return 0;
+					}
+				}
+				return 1;
+			}
+
+		// Knight Movement
+		} else if (piece.type == 'n') {
 			if (deltaY * deltaY + deltaX * deltaX == 5) return 1;
+		
+		// Bishop Movement
+		} else if (piece.type == 'b') {
+			if (absX == absY) {
+				for (index = 1; index < absX; index++) {
+					if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
+				}
+				return 1;
+			}
+
+		// Queen Movement
+		} else if (piece.type == 'q') {
+			if (absX == absY) {
+				for (index = 1; index < absX; index++) {
+					if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
+				}
+				return 1;
+			} else if (!deltaX || !deltaY) {
+				if (deltaX) {
+					for (index = 1; index < absX; index++) {
+						if (board[from.x+index*xDir][from.y].piece) return 0;
+					}
+				} else {
+					for (index = 1; index < absY; index++) {
+						if (board[from.x][from.y+index*yDir].piece) return 0;
+					}
+				}
+				return 1;
+			}
+
+		// King Movement
+		} else if (piece.type == 'k') {
+			if (deltaX <= 1 && Math.abs(deltaY) <= 1) {
+				return 1;
+			}
 		}
+
+
+
+
 	};
 
 	var listenClick = function (e) {
@@ -229,7 +310,7 @@ DSR.Chess.Controller = (function () {
 			var to = DSR.Chess.nameToNum(name);
 				dest = board[to.x][to.y];
 
-			if (dest.piece.color != controller.piece.color && validateMove(controller.piece.type, controller.from, to)) {
+			if (dest.piece.color != controller.piece.color && validateMove(controller.piece, controller.from, to)) {
 				board[to.x][to.y].setPiece(controller.piece);
 				board[controller.from.x][controller.from.y].clearPiece();
 			}
