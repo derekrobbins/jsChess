@@ -112,6 +112,7 @@ DSR.Chess.Model = (function () {
 		},
 
 		clearPiece: function () {
+			// Add event to clear view square on clearPiece
 			this.piece = 0;
 		},
 
@@ -255,21 +256,29 @@ DSR.Chess.Controller = (function () {
 
 		if(piece.type != 'n' && !emptyBetween(to, from)) return 0;
 
+		piece.moved = piece.moved || 0;
+
 		// Pawn movement
 		if (piece.type == 'p') {
 			if (deltaY == direction) {
 				// Standard movement
 				if (!deltaX && !capturePiece) {
-					piece.moved = 1;
+					piece.moved += 1;
+					console.log(piece.moved);
 					return 1;
 				// Capture movement
 				} else if (absX == 1 && capturePiece) {
-					piece.moved = 1;
+					piece.moved += 1;
+					return 1;
+				// Special case: en passant
+				} else if (piece.moved == 3 && board[to.x][from.y].piece.enpassant && !board[to.x][to.y].piece) {
+					board[to.x][from.y].clearPiece();
 					return 1;
 				}
 			// Special case first move pawn can move two spaces
 			} else if (deltaY == direction * 2 && !deltaX && !piece.moved) {
-				piece.moved = 1;
+				piece.moved = 2;
+				piece.enpassant = 1;
 				return 1;
 			}
 		// Rook Movement
