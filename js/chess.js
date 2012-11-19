@@ -211,6 +211,36 @@ DSR.Chess.Controller = (function () {
 		$('li.row li').click(listenClick);
 	};
 
+	var emptyBetween = function (from, to) {
+		var deltaX = to.x - from.x,
+			deltaY = to.y - from.y,
+			absX = Math.abs(deltaX),
+			absY = Math.abs(deltaY),
+			xDir = deltaX / absX,
+			yDir = deltaY / absY,
+			board = DSR.Chess.Model.board,
+			index = 1;
+
+		if (absX == absY) {
+			for (index = 1; index < absX; index++) {
+				if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
+			}
+			return 1;
+		} else if (!deltaX || !deltaY) {
+			if (deltaX) {
+				for (index = 1; index < absX; index++) {
+					if (board[from.x+index*xDir][from.y].piece) return 0;
+				}
+				return 1;
+			} else {
+				for (index = 1; index < absY; index++) {
+					if (board[from.x][from.y+index*yDir].piece) return 0;
+				}
+				return 1;
+			}
+		}
+	};
+
 	var validateMove = function (piece, from, to) {
 		var deltaX = to.x - from.x,
 			deltaY = to.y - from.y,
@@ -222,6 +252,8 @@ DSR.Chess.Controller = (function () {
 			board = DSR.Chess.Model.board,
 			capturePiece = board[to.x][to.y].piece,
 			index = 1;
+
+		if(piece.type != 'n' && !emptyBetween(to, from)) return 0;
 
 		// Pawn movement
 		if (piece.type == 'p') {
@@ -243,15 +275,7 @@ DSR.Chess.Controller = (function () {
 		// Rook Movement
 		} else if (piece.type == 'r') {
 			if (!deltaX || !deltaY) {
-				if (deltaX) {
-					for (index = 1; index < absX; index++) {
-						if (board[from.x+index*xDir][from.y].piece) return 0;
-					}
-				} else {
-					for (index = 1; index < absY; index++) {
-						if (board[from.x][from.y+index*yDir].piece) return 0;
-					}
-				}
+				piece.moved = 1;
 				return 1;
 			}
 
@@ -261,43 +285,27 @@ DSR.Chess.Controller = (function () {
 		
 		// Bishop Movement
 		} else if (piece.type == 'b') {
-			if (absX == absY) {
-				for (index = 1; index < absX; index++) {
-					if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
-				}
-				return 1;
-			}
+			if (absX == absY) return 1;
 
 		// Queen Movement
 		} else if (piece.type == 'q') {
-			if (absX == absY) {
-				for (index = 1; index < absX; index++) {
-					if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
-				}
-				return 1;
-			} else if (!deltaX || !deltaY) {
-				if (deltaX) {
-					for (index = 1; index < absX; index++) {
-						if (board[from.x+index*xDir][from.y].piece) return 0;
-					}
-				} else {
-					for (index = 1; index < absY; index++) {
-						if (board[from.x][from.y+index*yDir].piece) return 0;
-					}
-				}
-				return 1;
-			}
+			if (absX == absY || (!deltaX || !deltaY)) return 1;
 
 		// King Movement
 		} else if (piece.type == 'k') {
-			if (deltaX <= 1 && Math.abs(deltaY) <= 1) {
+			if (absX <= 1 && absY <= 1) {
+				piece.moved = 1;
 				return 1;
+			// Castle
+			} else if (!deltaY && !piece.moved && absX == 2) {
+				var rook = (xDir > 0) ? 7 : 0;
+				if (!board[rook][from.y].piece.moved && emptyBetween(from,{x:rook, y:from.y})) {
+					// Move rook to opposite side of king
+					board[to.x - 1 * xDir][from.y].setPiece(board[rook][from.y].piece);
+					return 1;
+				}
 			}
 		}
-
-
-
-
 	};
 
 	var listenClick = function (e) {
