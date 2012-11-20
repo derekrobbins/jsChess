@@ -51,10 +51,12 @@ li {
 .piece {
 	font-family: Arial,Helvetica,sans-serif;
 	position: absolute;
-	margin-top: -5px;
 	font-size: 40px;
+	padding-top: 5px;
 	width: 50px;
+	height: 45px;
 	text-align: center;
+	vertical-align: center;
 }
 
 .w.r:after {
