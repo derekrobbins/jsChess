@@ -1,0 +1,1113 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"squ",
+				"squareToPosition"
+			],
+			[
+				"class",
+				"classes"
+			],
+			[
+				"lis",
+				"listenClick"
+			],
+			[
+				"re",
+				"removePiece"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"set",
+				"setPiece"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"ticket",
+				"ticket_params"
+			],
+			[
+				"ti",
+				"ticket_params"
+			],
+			[
+				"url",
+				"urlParams"
+			],
+			[
+				"tic",
+				"ticket_url"
+			],
+			[
+				"eve",
+				"eventful-content-area"
+			],
+			[
+				"eventful",
+				"eventful-content-area"
+			],
+			[
+				"relea",
+				"release_date"
+			],
+			[
+				"hot",
+				"hot_events"
+			],
+			[
+				"per",
+				"performer_name"
+			],
+			[
+				"start",
+				"start_time"
+			],
+			[
+				"perform",
+				"performer_events"
+			],
+			[
+				"fa",
+				"favorite_spids"
+			],
+			[
+				"comp",
+				"competition"
+			],
+			[
+				"com",
+				"competition"
+			],
+			[
+				"fac",
+				"facebook_comments"
+			],
+			[
+				"sub",
+				"substr"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "rework.js",
+			"settings":
+			{
+				"buffer_size": 9183,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "controller.js",
+			"settings":
+			{
+				"buffer_size": 8065,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/derek/Sites/jsChess/chess.html",
+			"settings":
+			{
+				"buffer_size": 550,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "model.js",
+			"settings":
+			{
+				"buffer_size": 3079,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/derek/Sites/jsChess/css/chess.css",
+			"settings":
+			{
+				"buffer_size": 1189,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/manager/venue/dedupe/admin.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/view/stat-table.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/manager/venue/dedupe/load-list.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/manager/venue/dedupe/counts.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/manager/venue/dedupe.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/manager/venue/dedupe/counts.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/manager/venue/dedupe.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/universal/global.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/hosted/v2/components/event_listing.js",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Handler/Campaign.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Campaign.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/DB/Connect/Connect.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/utils/fields/image.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/site/widgets/panel-image-add.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/image-viewer.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/tickets/redirect.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/tickets/redirect.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/event-ticket.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/widgets/image-viewer.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/events/new.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/demands/detail.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/interstitials/ticket-buy-ddp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/events/detail.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/events/detail.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/demands/detail.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/performers/detail.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/performers/detail/tour-schedule.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/tour-schedule/performer.tt",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Hosted/Sites.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/tickets/redirect.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/redirect.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/events/detail/tickets.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/require/eventful/cookies.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/events/detail/tickets.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/widgets/click-ticket-link.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/events/tickets.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/footers/stats.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/widgets/common.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/sociable-labs/rondavu-container.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/site/events/detail.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/sociable-labs/rondavu-data.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies/browse.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/movies/browse.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/require/eventful/popover-change-location.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/widgets/movies/top-trailers.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/site/widgets/notification.js",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/DB/Connect.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/site/hosted/v2/client/nbcsandiego.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/lists/events-paginated.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/events.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/concerts.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/venues/detail.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/performers/detail/events.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/venues/detail/events.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies/detail/showtimes.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/events/categories.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/movies/showtimes.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/tour-schedule/venue.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/events/search.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/search.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/performers/detail/events-in-location.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/utils/macros.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/events/categories.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/lists/page_tabular.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/lists/columnar.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/events/detail.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/lists/local-events-paginated.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/tour-schedule/city.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/top-concert-stubhub.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/movies.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/r.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/events.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/interstitials/ticket-buy-edp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/interstitials/ticket-buy-pdp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Event/Event.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Inventory/TicketLink/TicketLink.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Handler/Handler.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/site/hosted/v2/common.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/users/detail/created/events.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/users/detail/created/past-events.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/footers/default.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies/theaters-showtimes.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/movies/detail/common.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/movies/condensed-cast.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies/detail/info.tt",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Category.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/js/require/eventful/google-analytics.js",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/feed-autodiscovery-links.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/universal/footer.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/movies/theaters-showtimes/favorites.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/static/css/site/widgets/movies/next-movie-rail.css",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/movies/now-playing.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/movies/browse.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/my.get",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Affiliate/HotTickets.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/DateTime/DateTime.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Affiliate/StubHub.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/default.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/widgets/facepile.tt",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/List/List.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/List/FacePile.pm",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/FacePile.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/campaigns/fiftyshades2012.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/default.get",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Base/Object.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/campaigns/fiftyshades2012/poll.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/campaigns/fiftyshades2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/campaigns/chronicle2012/rsvp.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/sections/facebook-comments.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/campaigns/chronicle2012/rsvp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/DemandPoll.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/performers/detail.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/competitions/pushgirls2012/rsvp.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/campaigns/afterdark2012.get",
+		"/Users/derek/Sites/derek2.eventful.com/modules/EVDB/Base/Object/Object.pm",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/pushgirls2012/rsvp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/campaigns/afterdark2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/battleship2012/rsvp.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/bully2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/battleship2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/pushgirls2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/campaigns/chronicle2012.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/campaigns/chronicle2012/final.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/competitions/battleship2012/rsvp.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/handlers/competitions/bully2012.get",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/battleship2012/interim.tt",
+		"/Users/derek/Sites/derek2.eventful.com/eventful/templates/competitions/bully2012/final.tt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/derek/Sites/derek.eventful.com/site/evKit/eventful/handlers",
+			"",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/static/js",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/static/css",
+			"/Users/derek/Sites/derek2.eventful.com/eventful",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/static/js",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/templates",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/static/css",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/templates",
+			"/Users/derek/Sites/derek2.eventful.com/modules/EVDB",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/handlers",
+			"",
+			"/Users/derek/Sites/derek2.eventful.com/eventful/templates",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"class",
+			"console",
+			"split",
+			"DSR.chess",
+			".game",
+			"this",
+			"toggle",
+			"jquserlistfavc",
+			"demand_member_count",
+			"images",
+			"oArgs",
+			"seid",
+			"ul",
+			"ul ",
+			"updateevents",
+			"updatesearch",
+			"categor",
+			"this.category",
+			"updatesearch",
+			"listenclose",
+			"claim",
+			"#stat",
+			"stat",
+			"dbh",
+			"eventful-venue-location-map",
+			"prepare",
+			".clickshow",
+			"images",
+			"stekcit",
+			"tour-schedule",
+			"tour dates",
+			"data-ga-category",
+			"pdp_main",
+			"tour schedule",
+			"tour",
+			"data-ga-label=\"Find Tickets",
+			"rondavu",
+			".rondavu",
+			".rondavu_container",
+			".rondavu_container {",
+			"div.rondavu_container {",
+			"rondavu",
+			"facebook",
+			"plu",
+			"top-trailers",
+			"top-trailers.js",
+			"#location-form",
+			".tt",
+			"hottest",
+			"tr class=",
+			"ticket",
+			"tour-schedule",
+			"link",
+			".tt",
+			"goto",
+			".tt",
+			"schedule",
+			"concerts",
+			"lid",
+			"venue.tt",
+			"more ",
+			".tt",
+			"box-search-results-events",
+			"search",
+			"class=\"tour-schedule\"",
+			"\"events\"",
+			"tour-sched",
+			"lid",
+			"concert",
+			"<ol",
+			"carousel",
+			" venues",
+			"venues",
+			"header no-bottom-border",
+			"section-head",
+			".tt",
+			"event_block",
+			"foo_block",
+			"ticket link",
+			"featured_evt_block",
+			"tckt",
+			"item_block",
+			"tckt-link",
+			"event-ticket.tt",
+			"event_ticket_link",
+			"lids",
+			"gcid",
+			"lids",
+			"$url",
+			"subpackage",
+			"lids",
+			"redirect",
+			"tour-",
+			"singles",
+			"carousel_query",
+			"concert",
+			"base_url",
+			"hottest",
+			"facebook",
+			".next-movie-item",
+			"hottest",
+			"query",
+			"facepile",
+			"widgets/facepile",
+			"facepile",
+			"detail/box-comments",
+			"<fb:comments",
+			"facebook",
+			"$competition",
+			"<fb:comments",
+			"campaigns/fifty",
+			"competition",
+			"url",
+			"canonical_url",
+			"$performer",
+			"<fb",
+			"<fb:comments",
+			"fb:",
+			"$performer",
+			"<fb:comments",
+			"<fb::comments",
+			"message_only",
+			"{message_only}",
+			"facebook",
+			"sub cache",
+			"sub list_facebook_comments",
+			"facebook",
+			"facepile"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"piece",
+			".stat"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "rework.js",
+					"settings":
+					{
+						"buffer_size": 9183,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7781,
+								7781
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3627.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "controller.js",
+					"settings":
+					{
+						"buffer_size": 8065,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4720,
+								4720
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3246.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/derek/Sites/jsChess/chess.html",
+					"settings":
+					{
+						"buffer_size": 550,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								325,
+								325
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "model.js",
+					"settings":
+					{
+						"buffer_size": 3079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								361,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/derek/Sites/jsChess/css/chess.css",
+					"settings":
+					{
+						"buffer_size": 1189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								571,
+								571
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 763.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"event_listing",
+				"eventful/static/js/site/hosted/v2/components/event_listing.js"
+			],
+			[
+				"campai",
+				"modules/EVDB/Handler/Campaign.pm"
+			],
+			[
+				"campa",
+				"modules/EVDB/Campaign.pm"
+			],
+			[
+				"stat-ta",
+				"eventful/static/css/view/stat-table.css"
+			],
+			[
+				"redirect.js",
+				"eventful/static/js/site/tickets/redirect.js"
+			],
+			[
+				"ticket.tt",
+				"eventful/templates/sections/event-ticket.tt"
+			],
+			[
+				"image.tt",
+				"eventful/templates/utils/fields/image.tt"
+			],
+			[
+				"panel-image-add.css",
+				"eventful/static/css/site/widgets/panel-image-add.css"
+			],
+			[
+				"image-viewer.tt",
+				"eventful/templates/widgets/image-viewer.tt"
+			],
+			[
+				"new.js",
+				"eventful/static/js/site/events/new.js"
+			],
+			[
+				"interst",
+				"eventful/templates/interstitials/ticket-buy-ddp.tt"
+			],
+			[
+				"performer.tt",
+				"eventful/templates/widgets/tour-schedule/performer.tt"
+			],
+			[
+				"tour-sc",
+				"eventful/templates/sections/performers/detail/tour-schedule.tt"
+			],
+			[
+				"sites",
+				"modules/EVDB/Hosted/Sites.pm"
+			],
+			[
+				"cookies.js",
+				"eventful/static/js/require/eventful/cookies.js"
+			],
+			[
+				"redirect.tt",
+				"eventful/templates/tickets/redirect.tt"
+			],
+			[
+				"detail.css",
+				"eventful/static/css/site/events/detail.css"
+			],
+			[
+				"rondavu-data",
+				"eventful/templates/sections/sociable-labs/rondavu-data.tt"
+			],
+			[
+				"rondavu-contain",
+				"eventful/templates/sections/sociable-labs/rondavu-container.tt"
+			],
+			[
+				"tondavu",
+				"eventful/templates/sections/sociable-labs/rondavu-container.tt"
+			],
+			[
+				"top-trailers.js",
+				"eventful/static/js/site/widgets/movies/top-trailers.js"
+			],
+			[
+				"popover-change",
+				"eventful/static/js/require/eventful/popover-change-location.js"
+			],
+			[
+				"notification.js",
+				"eventful/static/js/site/widgets/notification.js"
+			],
+			[
+				"browse.js",
+				"eventful/static/js/site/movies/browse.js"
+			],
+			[
+				"click",
+				"eventful/static/js/site/widgets/click-ticket-link.js"
+			],
+			[
+				"event-tic",
+				"eventful/templates/sections/event-ticket.tt"
+			],
+			[
+				"events-p",
+				"eventful/templates/widgets/lists/events-paginated.tt"
+			],
+			[
+				"performer.",
+				"eventful/templates/widgets/tour-schedule/performer.tt"
+			],
+			[
+				"events-pa",
+				"eventful/templates/widgets/lists/events-paginated.tt"
+			],
+			[
+				"perfor",
+				"eventful/templates/widgets/tour-schedule/performer.tt"
+			],
+			[
+				"tour-s",
+				"eventful/templates/sections/performers/detail/tour-schedule.tt"
+			],
+			[
+				"events-in-",
+				"eventful/templates/sections/performers/detail/events-in-location.tt"
+			],
+			[
+				"venue.tt",
+				"eventful/templates/widgets/tour-schedule/venue.tt"
+			],
+			[
+				"macros",
+				"eventful/templates/utils/macros.tt"
+			],
+			[
+				"performer",
+				"eventful/templates/widgets/tour-schedule/performer.tt"
+			],
+			[
+				"top-concert",
+				"eventful/templates/widgets/top-concert-stubhub.tt"
+			],
+			[
+				"performereventsinl",
+				"eventful/templates/sections/performers/detail/events-in-location.tt"
+			],
+			[
+				"mac",
+				"eventful/templates/utils/macros.tt"
+			],
+			[
+				"events-",
+				"eventful/templates/widgets/lists/events-paginated.tt"
+			],
+			[
+				"ticket-buy",
+				"eventful/templates/interstitials/ticket-buy-pdp.tt"
+			],
+			[
+				"page_tab",
+				"eventful/templates/widgets/lists/page_tabular.tt"
+			],
+			[
+				"event-ticket",
+				"eventful/templates/sections/event-ticket.tt"
+			],
+			[
+				"column",
+				"eventful/templates/widgets/lists/columnar.tt"
+			],
+			[
+				"ticket-buy-ed",
+				"eventful/templates/interstitials/ticket-buy-edp.tt"
+			],
+			[
+				"hand",
+				"modules/EVDB/Handler/Handler.pm"
+			],
+			[
+				"tickets.js",
+				"eventful/static/js/site/events/tickets.js"
+			],
+			[
+				"click-tic",
+				"eventful/static/js/site/widgets/click-ticket-link.js"
+			],
+			[
+				"detail.js",
+				"eventful/static/js/site/events/detail.js"
+			],
+			[
+				"local-even",
+				"eventful/templates/widgets/lists/local-events-paginated.tt"
+			],
+			[
+				"city.tt",
+				"eventful/templates/widgets/tour-schedule/city.tt"
+			],
+			[
+				"topconcer",
+				"eventful/templates/widgets/top-concert-stubhub.tt"
+			],
+			[
+				"conde",
+				"eventful/templates/sections/movies/condensed-cast.tt"
+			],
+			[
+				"category.pm",
+				"modules/EVDB/Category.pm"
+			],
+			[
+				"site",
+				"modules/EVDB/Hosted/Sites.pm"
+			],
+			[
+				"goo",
+				"eventful/static/js/require/eventful/google-analytics.js"
+			],
+			[
+				"footer.css",
+				"eventful/static/css/universal/footer.css"
+			],
+			[
+				"facepile.pm",
+				"modules/EVDB/FacePile.pm"
+			],
+			[
+				"fifty",
+				"eventful/handlers/campaigns/fiftyshades2012.get"
+			],
+			[
+				"facepile",
+				"eventful/templates/widgets/facepile.tt"
+			],
+			[
+				"ob",
+				"modules/EVDB/Base/Object.pm"
+			],
+			[
+				"object.pm",
+				"modules/EVDB/Base/Object.pm"
+			],
+			[
+				"rsvp",
+				"eventful/handlers/campaigns/chronicle2012/rsvp.get"
+			],
+			[
+				"facebook-co",
+				"eventful/templates/sections/facebook-comments.tt"
+			],
+			[
+				"fif",
+				"eventful/handlers/campaigns/fiftyshades2012.get"
+			],
+			[
+				"fiftyshades",
+				"eventful/templates/campaigns/fiftyshades2012.tt"
+			],
+			[
+				"endofilln",
+				"eventful/handlers/competitions/theendofillness2012.get"
+			],
+			[
+				"chroni",
+				"eventful/handlers/campaigns/chronicle2012.get"
+			],
+			[
+				"pushgirls",
+				"eventful/handlers/competitions/pushgirls2012.get"
+			],
+			[
+				"battlesh",
+				"eventful/handlers/competitions/battleship2012.get"
+			],
+			[
+				"endofill",
+				"eventful/templates/competitions/theendofillness2012.tt"
+			],
+			[
+				"detail.tt",
+				"eventful/templates/performers/detail.tt"
+			],
+			[
+				"interim.tt",
+				"eventful/templates/competitions/pushgirls2012/interim.tt"
+			],
+			[
+				"final.tt",
+				"eventful/templates/competitions/bully2012/final.tt"
+			],
+			[
+				"bully",
+				"eventful/handlers/competitions/bully2012.get"
+			],
+			[
+				"rsvp.get",
+				"eventful/handlers/competitions/battleship2012/rsvpjoin.get"
+			],
+			[
+				"after",
+				"eventful/handlers/campaigns/afterdark2012.get"
+			],
+			[
+				"face",
+				"eventful/templates/sections/facebook-comments.tt"
+			],
+			[
+				"facebook",
+				"eventful/templates/sections/facebook-comments.tt"
+			],
+			[
+				"facebook-comme",
+				"eventful/templates/sections/facebook-comments.tt"
+			],
+			[
+				"chron",
+				"eventful/templates/campaigns/chronicle2012.tt"
+			],
+			[
+				"push",
+				"eventful/templates/competitions/pushgirls2012.tt"
+			],
+			[
+				"bat",
+				"eventful/templates/competitions/battleship2012.tt"
+			],
+			[
+				"rsvp.tt",
+				"eventful/templates/competitions/components/rsvp.tt"
+			],
+			[
+				"afterdar",
+				"eventful/templates/campaigns/afterdark2012.tt"
+			],
+			[
+				"facebook-comment",
+				"eventful/templates/sections/facebook-comments.tt"
+			],
+			[
+				"box-commen",
+				"eventful/templates/sections/performers/detail/box-comments.tt"
+			],
+			[
+				"pushgirls.get",
+				"eventful/handlers/competitions/pushgirls2012.get"
+			],
+			[
+				"facepile.get",
+				"eventful/handlers/apps/facebook/demandit/profilebox.get"
+			],
+			[
+				"facepile.tt",
+				"eventful/templates/widgets/facepile.tt"
+			],
+			[
+				"ddp.tt",
+				"eventful/templates/interstitials/ticket-buy-ddp.tt"
+			],
+			[
+				"google-an",
+				"eventful/static/js/require/eventful/google-analytics.js"
+			],
+			[
+				"location.js",
+				"eventful/static/js/require/eventful/type-ahead/location.js"
+			],
+			[
+				"type-ahead.js",
+				"eventful/static/js/require/eventful/type-ahead.js"
+			],
+			[
+				"spread-the",
+				"eventful/templates/competitions/components/spread-the-word.tt"
+			],
+			[
+				"share-tool",
+				"eventful/templates/hosted/v1/widgets/share-tools.tt"
+			],
+			[
+				"han",
+				"modules/EVDB/Handler/Handler.pm"
+			],
+			[
+				"featured-slides",
+				"eventful/handlers/tools/events/featured-slides.get"
+			],
+			[
+				"handler",
+				"modules/EVDB/Handler/Handler.pm"
+			],
+			[
+				"formval.",
+				"eventful/static/js/require/eventful/formval.js"
+			],
+			[
+				"head.tt",
+				"eventful/templates/sections/head.tt"
+			],
+			[
+				"common.tt",
+				"eventful/templates/sections/movies/detail/common.tt"
+			],
+			[
+				"notification.get",
+				"eventful/handlers/tools/notification.get"
+			],
+			[
+				"panel-alert",
+				"eventful/templates/widgets/panel-alert.tt"
+			],
+			[
+				"text",
+				"eventful/templates/utils/fields/text.tt"
+			],
+			[
+				"type-ahead",
+				"eventful/templates/utils/fields/type-ahead.tt"
+			],
+			[
+				"text.tt",
+				"eventful/templates/utils/fields/text.tt"
+			],
+			[
+				"typeahead",
+				"eventful/static/css/require/hosted/type-ahead.css"
+			],
+			[
+				"eventful-type",
+				"eventful/templates/competitions/headers/venue-type-ahead.tt"
+			],
+			[
+				"error",
+				"modules/EVDB/XML/Error.pm"
+			],
+			[
+				"handl",
+				"modules/EVDB/Handler/Handler.pm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 199.0,
+	"status_bar_visible": true
+}

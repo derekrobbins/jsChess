@@ -14,7 +14,7 @@ DSR.Chess.Controller = (function () {
 		$('li.row li').click(listenClick);
 	};
 
-	var emptyBetween = function (from, to) {
+/*	var emptyBetween = function (from, to) {
 		var deltaX = to.x - from.x,
 			deltaY = to.y - from.y,
 			absX = Math.abs(deltaX),
@@ -214,7 +214,7 @@ DSR.Chess.Controller = (function () {
 				}
 			}
 		}
-	};
+	}; */
 
 	var listenClick = function (e) {
 		if (!controller.piece && e.currentTarget.innerHTML == '') return;
