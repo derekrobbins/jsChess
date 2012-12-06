@@ -2,9 +2,9 @@ if (typeof(window.DSR) === 'undefined') {
   window.DSR = {};
 }
 
-DSR.count = 0;
-
 DSR.Chess = function () {
+  // Utility functions
+
   var nameToPosition = function (name) {
     return {
       x: name.charCodeAt(0) - 97,
@@ -12,8 +12,144 @@ DSR.Chess = function () {
     };
   };
 
+  var positionToName = function (position) {
+    return String.fromCharCode(position.x + 97) + (position.y + 1);
+  }
+
+  var validateMove = function (from, to, piece) {
+    from  = nameToPosition(from);
+    to    = nameToPosition(to);
+
+    if(piece.type != 'n' && !emptyBetween(to, from)) return 0;
+
+    this.p = function (from, to) {
+      var deltaX = to.x - from.x,
+          deltaY = to.y - from.y,
+          absX = Math.abs(deltaX),
+          color = this.board[from.x][from.y].piece.color ? 1 : 0 ,
+          direction = color ? -1 : 1,
+          capturePiece = this.board[to.x][to.y].piece;
+
+      // Pawn movement
+      if (deltaY == direction) {
+        // Standard movement
+        if (!deltaX && !capturePiece) {
+          return 1;
+        // Capture movement
+        } else if (absX == 1 && capturePiece) {
+          return 1;
+        // Special case: en passant
+        } else if (absX == 1 && to.x == this.enpassant[color].x && to.y == this.enpassant[color].y) {
+          this.board[to.x][to.y - direction].removePiece();
+          return 1;
+        }
+      // Special case first move pawn can move two spaces
+      } else if (deltaY == direction * 2 && !deltaX && to.y == Math.floor(4 - direction * .3)) {
+        // Check to see if skiped square is being attacked by a pawn of the opposite color
+        if ($.inArray({type: 'p', color: (color ^ 1)}, this.board[from.x][from.y + direction].attackers)) {
+          this.enpassant[color ^ 1] = {x: from.x, y: from.y + direction};
+        }
+        this.enpassant[color ^ 1] = {x: from.x, y: (from.y + direction)};
+        return 1;
+      }
+      return 0;
+    };
+
+    this.r = function (from, to) {
+      var deltaX = to.x - from.x,
+          deltaY = to.y - from.y;
+
+      if (!deltaX || !deltaY) {
+        delete this.board[from.x][from.y].castle;
+        return 1;
+      }
+    };
+
+    this.n = function (from, to) {
+      var deltaX = to.x - from.x,
+          deltaY = to.y - from.y;
+      if (deltaY * deltaY + deltaX * deltaX == 5) return 1;
+    };
+
+    this.b = function (from, to) {
+      var absX = Math.abs(to.x - from.x),
+          absY = Math.abs(to.y - from.y);
+
+      if (absX == absY) return 1;
+    };
+
+    this.q = function (from, to) {
+      var deltaX = to.x - from.x,
+          deltaY = to.y - from.y,
+          absX = Math.abs(deltaX),
+          absY = Math.abs(deltaY);
+
+      if (absX == absY || (!deltaX || !deltaY)) return 1;
+    };
+
+    this.k = function (from, to) {
+      var deltaX = to.x - from.x,
+          deltaY = to.y - from.y,
+          absX = Math.abs(deltaX),
+          absY = Math.abs(deltaY),
+          xDir = deltaX / absX;
+
+      // ***ADD: test for attacked squares***
+      if (absX <= 1 && absY <= 1) {
+        delete this.board[from.x][from.y].castle;
+        return 1;
+      // Castle
+      } else if (absX == 2 && !deltaY && this.board[from.x][from.y].castle) {
+        var rook = {
+          x: (xDir > 0) ? 7 : 0,
+          y: from.y
+        },
+          rookSquare = positionToName(rook);
+        if (this.board[rook.x][rook.y].castle && emptyBetween(from, rookSquare)) {
+          // Move rook to opposite side of king;
+          this.movePiece(rookSquare, positionToName({x: to.x - 1 * xDir, y: from.y}));
+          return 1;
+        }
+      }
+    };
+
+    return this[piece.type].apply(game.Model, [from, to]);
+  };
+
+  var emptyBetween = function (from, to) {
+    var deltaX = to.x - from.x,
+        deltaY = to.y - from.y,
+        absX = Math.abs(deltaX),
+        absY = Math.abs(deltaY),
+        xDir = deltaX / absX,
+        yDir = deltaY / absY,
+        board = game.Model.board,
+        index = 1;
+
+    if (absX == absY) {
+      for (index = 1; index < absX; index++) {
+        if (board[from.x+index*xDir][from.y+index*yDir].piece) return 0;
+      }
+      return 1;
+    } else if (!deltaX || !deltaY) {
+      if (deltaX) {
+        for (index = 1; index < absX; index++) {
+          if (board[from.x+index*xDir][from.y].piece) return 0;
+        }
+        return 1;
+      } else {
+        for (index = 1; index < absY; index++) {
+          if (board[from.x][from.y+index*yDir].piece) return 0;
+        }
+        return 1;
+      }
+    }
+  };
+
   var game = {
     Model: {
+      enpassant:        [0, 0],
+      enpassantPassed:  [0, 0],
       init: function () {
         this.board = this.createBoard();
 
@@ -30,6 +166,7 @@ DSR.Chess = function () {
         SquareModel.prototype = {
           setPiece: function (piece) {
             this.piece = piece;
+
             game.View.setPiece(piece, this.name);
           },
           removePiece: function () {
@@ -67,187 +204,28 @@ DSR.Chess = function () {
               type:   (y % 3) ? pieces[x] : 'p'
             };
             this.board[x][y % 8].setPiece(piece);
+            if (piece.type == 'k' || piece.type == 'r') {
+              this.board[x][y % 8].castle = 1;
+            }
           }
         }
       },
 
       movePiece: function (from, to) {
         var posFrom = nameToPosition(from),
-            posTo   = nameToPosition(to);
-        game.Model.board[posTo.x][posTo.y].setPiece(game.Model.board[posFrom.x][posFrom.y].removePiece());
-      },
+            posTo   = nameToPosition(to),
+            piece = game.Model.board[posFrom.x][posFrom.y].piece;
+            //classes = $('#' + from).attr('class').split(' '),
+            //piece   = {
+            //  type:  classes.pop(),
+            //  color: classes.pop()
+            //};
 
-      // A set of functions to determine which squares are attacked by a given piece
-      getAttacks: {
-        p: function () {
-          var direction = this.color == 'w' ? 1 : -1,
-            list = [];
-
-          if (this.position.x + 1 < 8) {
-            list.push({x: this.position.x + 1, y: this.position.y + direction});
-          }
-          if (this.position.x - 1 >= 0) {
-            list.push({x: this.position.x - 1, y: this.position.y + direction});
-          }
-
-          return list;
-        },
-
-        r: function () {
-          var list = [],
-            index = 1,
-            flags = {
-                  xr: 1,
-                  xl: 1,
-                  yu: 1,
-                  yd: 1
-                },
-            board = DSR.Chess.Model.board,
-            x = this.position.x,
-            y = this.position.y;
-
-          for (; index < 8; index++) {
-            if (flags.xr) {
-              if (x + index < 8) {
-                if (board[x + index][y].piece) {
-                  flags.xr = 0;
-                }
-                list.push({x: x + index, y: y});
-              } else {
-                flags.xr = 0;
-              }
-            }
-            if (flags.xl) {
-              if (x - index >= 0) {
-                if (board[x - index][y].piece) {
-                  flags.xl = 0;
-                }
-                list.push({x: x - index, y: y});
-              } else {
-                flags.xl = 0;
-              }
-            }
-            if (flags.yu) {
-              if (y + index < 8) {
-                if (board[x][y + index].piece) {
-                  flags.yu = 0;
-                }
-                list.push({x: x, y: y + index});
-              } else {
-                flags.yu = 0;
-              }
-            }
-            if (flags.yd) {
-              if (y - index >= 0) {
-                if (board[x][y - index].piece) {
-                  flags.yd = 0;
-                }
-                list.push({x: x, y: y - index});
-              } else {
-                flags.yd = 0;
-              }
-            }
-          }
-          return list;
-        },
-      },
-
-      // A set of functions to validate moves, one for each type of piece
-      validateMove: {
-        p: function (to) {
-          if(this.type != 'n' && !emptyBetween(to, this.position)) return 0;
-
-          var deltaX = to.x - this.position.x,
-            deltaY = to.y - this.position.y,
-            absX = Math.abs(deltaX),
-            direction = this.color == 'w' ? 1 : -1,
-            board = DSR.Chess.Model.board,
-            capturePiece = board[to.x][to.y].piece;
-
-          // Pawn movement
-          if (deltaY == direction) {
-            // Standard movement
-            if (!deltaX && !capturePiece) {
-              this.moved += 1;
-              if (this.moved == 6) {
-                // ***ADD: Fire event for promotion***
-              }
-              return 1;
-            // Capture movement
-            } else if (absX == 1 && capturePiece) {
-              this.moved += 1;
-              return 1;
-            // Special case: en passant
-            } else if (this.moved == 3 && board[to.x][from.y].piece.enpassant && !board[to.x][to.y].piece) {
-              board[to.x][from.y].clearPiece();
-              return 1;
-            }
-          // Special case first move pawn can move two spaces
-          } else if (deltaY == direction * 2 && !deltaX && !this.moved) {
-            this.moved = 2;
-            this.enpassant = 1;
-            return 1;
-          }
-        },
-
-        r: function (to) {
-          if(this.type != 'n' && !emptyBetween(to, this.position)) return 0;
-
-          var deltaX = to.x - this.position.x,
-            deltaY = to.y - this.position.y;
-
-          if (!deltaX || !deltaY) {
-            this.moved = 1;
-            return 1;
-          }
-        },
-
-        n: function (to) {
-          var deltaX = to.x - this.position.x,
-            deltaY = to.y - this.position.y;
-          if (deltaY * deltaY + deltaX * deltaX == 5) return 1;
-        },
-
-        b: function (to) {
-          if(this.type != 'n' && !emptyBetween(to, this.position)) return 0;
-
-          var absX = Math.abs(to.x - this.position.x),
-            absY = Math.abs(to.y - this.position.y);
-
-          if (absX == absY) return 1;
-        },
-
-        q: function (to) {
-          if(this.type != 'n' && !emptyBetween(to, this.position)) return 0;
-
-          var deltaX = to.x - this.position.x,
-            deltaY = to.y - this.position.y,
-            absX = Math.abs(deltaX),
-            absY = Math.abs(deltaY);
-
-          if (absX == absY || (!deltaX || !deltaY)) return 1;
-        },
-
-        k: function (to) {
-          var deltaX = to.x - this.position.x,
-            deltaY = to.y - this.position.y,
-            absX = Math.abs(deltaX),
-            absY = Math.abs(deltaY),
-            xDir = deltaX / absX;
-
-          // ***ADD: test for attacked squares***
-          if (absX <= 1 && absY <= 1) {
-            this.moved = 1;
-            return 1;
-          // Castle
-          } else if (!deltaY && !this.moved && absX == 2) {
-            var rook = (xDir > 0) ? 7 : 0;
-            if (!board[rook][from.y].piece.moved && emptyBetween(from,{x:rook, y:this.position.y})) {
-              // Move rook to opposite side of king
-              board[to.x - 1 * xDir][this.position.y].setPiece(board[rook][this.position.y].piece);
-              return 1;
-            }
-          }
+        if(validateMove(from, to, piece)) { // Validate move
+          game.Model.board[posTo.x][posTo.y].setPiece(game.Model.board[posFrom.x][posFrom.y].removePiece());
+          return 1;
+        } else {
+          return 0;
         }
       },
     },
@@ -299,7 +277,21 @@ DSR.Chess = function () {
     Controller: {
       turn: 0,
       beginTurn: function () {
-        this.turn = this.turn ^ 1;
+        this.turn ^= 1;
+
+        console.log(this.turn ? 'w' : 'bl');
+
+        if (game.Model.enpassantPassed[this.turn]) {
+          game.Model.enpassant[this.turn] = 0;
+          game.Model.enpassantPassed[this.turn] = 0;
+        } else {
+          game.Model.enpassantPassed[this.turn] = 1;
+        }
+        
+        this.resetTurn();
+      },
+
+      resetTurn: function () {
         $('.piece.' + (this.turn ? 'w' : 'bl')).one('click', game.Controller.listenClick);
       },
 
@@ -307,10 +299,17 @@ DSR.Chess = function () {
         var from    = this.id;
         $('.piece').unbind('click');
         
-        $('.row li:not(.piece.' + (game.Controller.turn ? 'w' : 'bl') + ')').one('click', function () {
+        $('.row li').one('click', function () {
+          var color = game.Controller.turn ? 'w' : 'bl';
+
           $('.row li').unbind('click');
-          game.Model.movePiece(from, this.id);
-          game.Controller.beginTurn();
+          // If move is invalid reset turn
+          if (!$(this).hasClass(color) && game.Model.movePiece(from, this.id)) {
+            game.Controller.beginTurn();
+          } else {
+            game.Controller.resetTurn();
+          } 
+          
         });
       }
     }
