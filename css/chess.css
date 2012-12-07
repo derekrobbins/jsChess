@@ -82,8 +82,9 @@ ul li {
 	background: -webkit-gradient( radial, 66% 66%, 10, 33% 23%, 70, from(hsl(0,30%,30%)), to(hsl(0,20%,47%)))!important;
 }
 
-.piece:after {
-	color: hsl(0,100%,5%);
+.piece:after,
+[data-piece] {
+	color: hsl(0,70%,8%);
 	font-family: Arial,Helvetica,sans-serif;
 	position: absolute;
 	font-size: 45px;
@@ -92,9 +93,11 @@ ul li {
 	height: 100%;
 	text-align: center;
 	vertical-align: center;
+	text-shadow: 0 0 30px hsla(1,50%,90%,0.5);
 }
 
-.w.r:after {
+.w.r:after,
+[data-piece=r]:after {
 	content: '\2656';
 }
 
