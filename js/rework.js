@@ -271,6 +271,14 @@ DSR.Chess = function () {
       recordMove: function (piece, to) {
         var move = (piece.type == 'p' ? '' : piece.type.toUpperCase()) + to;
         $(piece.color ? '#blackmoves' : '#whitemoves').append('<li>' + move + '</li>');
+      },
+
+      setActive: function (el) {
+        $('#' + el).addClass('active');
+      },
+
+      unsetActive: function (el) {
+        $('#' + el).removeClass('active');
       }
 
     },
@@ -298,9 +306,13 @@ DSR.Chess = function () {
       listenClick: function () {
         var from    = this.id;
         $('.piece').unbind('click');
+
+        game.View.setActive(from);
         
         $('.row li').one('click', function () {
           var color = game.Controller.turn ? 'w' : 'bl';
+
+          game.View.unsetActive(from);
 
           $('.row li').unbind('click');
           // If move is invalid reset turn

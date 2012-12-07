@@ -63,11 +63,11 @@ ul li {
 	background: -webkit-gradient( radial, 33% 33%, 10, 33% 23%, 70, from(hsl(10,10%,68%)), to(hsl(17,28%,63%)));
 }
 
-.selected:after {
+.active:after {
 	width: 50px;
 	height: 50px;
 	display: block;
-
+	box-shadow: 0 0 23px hsl(202,90%,5%);
 	animation-duration: 1s;
 	animation-name: fadein;
 	animation-iteration-count: infinite;
