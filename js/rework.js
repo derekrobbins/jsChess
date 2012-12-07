@@ -266,6 +266,11 @@ DSR.Chess = function () {
 
       movePiece: function (from, to) {
         this.setPiece(this.removePiece(from), to);
+      },
+
+      recordMove: function (piece, to) {
+        var move = (piece.type == 'p' ? '' : piece.type.toUpperCase()) + to;
+        $(piece.color ? '#blackmoves' : '#whitemoves').append('<li>' + move + '</li>');
       }
 
     },

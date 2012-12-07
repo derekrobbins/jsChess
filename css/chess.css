@@ -1,3 +1,19 @@
+@keyframes fadein {
+  0% {
+    box-shadow: 0 0 0px hsl(202,90%,5%);
+  }
+  50% {
+  	box-shadow: 0 0 23px hsl(202,90%,5%);
+  }
+  100% {
+  	box-shadow: 0 0 0px hsl(202,90%,5%);
+  }
+}
+
+body {
+	background-color: hsl(0,3%,80%);
+}
+
 .modalShade {
 	position: absolute;
 	z-index: 10;
@@ -25,15 +41,16 @@ ul {
 	padding: 0;
 }
 
-li {
+ul li {
 	width: 50px;
 	height: 50px;
 	position: relative;
 }
 
 .board {
-	border: 5px solid #000;
+	border: 4px double hsla(0,100%,5%,0.8);
 	width: 400px;
+	margin: auto;
 }
 
 .row {
@@ -43,13 +60,30 @@ li {
 
 .row ul li {
 	display: inline-block;
+	background: -webkit-gradient( radial, 33% 33%, 10, 33% 23%, 70, from(hsl(10,10%,68%)), to(hsl(17,28%,63%)));
+}
+
+.selected:after {
+	width: 50px;
+	height: 50px;
+	display: block;
+
+	animation-duration: 1s;
+	animation-name: fadein;
+	animation-iteration-count: infinite;
+}
+
+.row ul li:hover {
+	background: -webkit-gradient( radial, 50% 50%, 6, 33% 23%, 70, from(hsl(-55,14%,43%)), to(hsl(-37,16%,51%)))!important;
 }
 
 .black {
 	background-color: #6B9;
+	background: -webkit-gradient( radial, 66% 66%, 10, 33% 23%, 70, from(hsl(0,30%,30%)), to(hsl(0,20%,47%)))!important;
 }
 
 .piece:after {
+	color: hsl(0,100%,5%);
 	font-family: Arial,Helvetica,sans-serif;
 	position: absolute;
 	font-size: 45px;
@@ -106,4 +140,20 @@ li {
 
 .bl.p:after {
 	content: '\265F';
+}
+
+#whitemoves,
+#blackmoves {
+	float: left;
+	margin: 0;
+	margin-right: 50px;
+}
+
+#log {
+	float: right;
+	margin-right: 655px;
+	font-family: arial;
+	font-size: 14px;
+	padding: 0;
+	color: hsl(0,60%,20%);
 }
