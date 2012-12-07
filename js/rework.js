@@ -233,7 +233,7 @@ DSR.Chess = function () {
         for (; x; x--) {
           html += '<li class="row"><ul>';
           for (y = 0; y < 8; y++) {
-            color = ((y + x % 2) % 2) ? 'white' : 'black';
+            color = ((y + x % 2) % 2) ? 'black' : 'white';
             html += '<li id="' + String.fromCharCode(y + 97) + x + '" class="' + color + '"></li>'
           }
           html += '</ul></li>';
