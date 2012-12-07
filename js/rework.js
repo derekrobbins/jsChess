@@ -215,11 +215,6 @@ DSR.Chess = function () {
         var posFrom = nameToPosition(from),
             posTo   = nameToPosition(to),
             piece = game.Model.board[posFrom.x][posFrom.y].piece;
-            //classes = $('#' + from).attr('class').split(' '),
-            //piece   = {
-            //  type:  classes.pop(),
-            //  color: classes.pop()
-            //};
 
         if(validateMove(from, to, piece)) { // Validate move
           game.Model.board[posTo.x][posTo.y].setPiece(game.Model.board[posFrom.x][posFrom.y].removePiece());
@@ -329,9 +324,3 @@ DSR.Chess = function () {
 $().ready(function () {
   DSR.chess = DSR.Chess();
 });
-
-// Model
-
-// View
-
-// Controller
