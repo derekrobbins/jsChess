@@ -41,7 +41,7 @@ ul {
 	padding: 0;
 }
 
-ul li {
+.board ul li {
 	width: 50px;
 	height: 50px;
 	position: relative;
@@ -58,9 +58,19 @@ ul li {
 	border: none;
 }
 
-.row ul li {
+.row li {
 	display: inline-block;
 	background: -webkit-gradient( radial, 33% 33%, 10, 33% 23%, 70, from(hsl(10,10%,68%)), to(hsl(17,28%,63%)));
+}
+
+.row:nth-child(2n-1) ul li:nth-child(2n),
+.row:nth-child(2n) ul li:nth-child(2n -1) {
+	background-color: #6B9;
+	background: -webkit-gradient( radial, 66% 66%, 10, 33% 23%, 70, from(hsl(0,30%,30%)), to(hsl(0,20%,47%)));
+}
+
+.row ul li:hover {
+	background: -webkit-gradient( radial, 50% 50%, 6, 33% 23%, 70, from(hsl(-55,14%,43%)), to(hsl(-37,16%,51%)))!important;
 }
 
 .active:after {
@@ -73,17 +83,7 @@ ul li {
 	animation-iteration-count: infinite;
 }
 
-.row ul li:hover {
-	background: -webkit-gradient( radial, 50% 50%, 6, 33% 23%, 70, from(hsl(-55,14%,43%)), to(hsl(-37,16%,51%)))!important;
-}
-
-.black {
-	background-color: #6B9;
-	background: -webkit-gradient( radial, 66% 66%, 10, 33% 23%, 70, from(hsl(0,30%,30%)), to(hsl(0,20%,47%)))!important;
-}
-
-.piece:after,
-[data-piece] {
+.piece:after {
 	color: hsl(0,70%,8%);
 	font-family: Arial,Helvetica,sans-serif;
 	position: absolute;
@@ -96,8 +96,7 @@ ul li {
 	text-shadow: 0 0 30px hsla(1,50%,90%,0.5);
 }
 
-.w.r:after,
-[data-piece=r]:after {
+.w.r:after {
 	content: '\2656';
 }
 
@@ -149,7 +148,7 @@ ul li {
 #blackmoves {
 	float: left;
 	margin: 0;
-	margin-right: 50px;
+	width: 60px;
 }
 
 #log {

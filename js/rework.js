@@ -5,6 +5,16 @@ if (typeof(window.DSR) === 'undefined') {
 DSR.Chess = function () {
   // Utility functions
 
+  var fireViewComplete = function () {
+    var e = document.createEvent("UIEvents");
+    e.initEvent('view complete', true, true);
+    document.body.dispatchEvent(e);
+  };
+
+  var subscribeViewComplete = function (func) {
+    window.addEventListener('view complete', func, false);
+  };
+
   var nameToPosition = function (name) {
     return {
       x: name.charCodeAt(0) - 97,
@@ -116,6 +126,92 @@ DSR.Chess = function () {
     return this[piece.type].apply(game.Model, [from, to]);
   };
 
+  var getAttacks = function (square) {
+    var position  = nameToPosition(square.name),
+        index     = 0,
+        attacks   = [];
+
+    this.p = function () {
+      var direction = square.piece.color ? -1 : 1;
+
+      if (position.x < 7) attacks.push({x: position.x + 1, y: position.y + direction});
+      if (position.x > 0) attacks.push({x: position.x - 1, y: position.y + direction});
+    };
+
+    this.r = function () {
+      var iterator    = 0,
+          checkSquare;
+
+      for (key in position) {
+        checkSquare = {x: position.x, y: position.y};
+        for (iterator = position[key] - 1; iterator >= 0; iterator--) {
+          checkSquare[key] = iterator;
+          attacks.push(checkSquare);
+          if (game.Model.board[checkSquare.x][checkSquare.y].piece) break;
+        }
+        for (iterator = position[key] + 1; iterator < 8; iterator++) {
+          checkSquare[key] = iterator;
+          attacks.push(checkSquare);
+          if (game.Model.board[checkSquare.x][checkSquare.y].piece) break;
+        }
+      }
+    };
+
+    this.b = function () {
+
+    };
+
+    this.n = function () {
+      var dir       = [2, 1],
+          iterator  = 1,
+          negX      = -1,
+          negY      = -1,
+          x, y;
+
+      for (; iterator >= 0; iterator--) {
+        do {
+          do {
+            x = position.x + dir[iterator] * negX;
+            y = position.y + dir[iterator ^ 1] * negY;
+
+            if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+              attacks.push({x: x, y: y});
+            }
+            negY *= -1;
+          } while (negY > 0)
+          negX *= -1;
+        } while (negX > 0)
+      }
+    };
+
+    this.q = function () {
+
+    };
+
+    this.k = function () {
+
+    };
+
+    // Remove any previous attacks
+    for (; index < square.attacks.length; index++) {
+      delete game.Model.board[square.attacks[index].x][square.attacks[index].x].attackers[square.name];
+    }
+
+    this[square.piece.type].call();
+
+    return setAttacks(attacks, square.name, square.piece.type);
+  };
+
+  var setAttacks = function (attacks, name, type) {
+    var board = game.Model.board;
+        index = 0;
+    for (; index < attacks.length; index++) {
+      board[attacks[index].x][attacks[index].y].attackers[name] = type;
+    }
+
+    return attacks
+  };
+
   var emptyBetween = function (from, to) {
     var deltaX = to.x - from.x,
         deltaY = to.y - from.y,
@@ -159,14 +255,28 @@ DSR.Chess = function () {
       createBoard: function () {
         var SquareModel = function (name) {
             this.name       = name;
-            this.attackers  = [];
+            this.attackers  = {};
+            this.attacks    = [];
             this.piece      = 0;
         };
 
         SquareModel.prototype = {
-          setPiece: function (piece) {
+          setPiece: function (piece, init) {
+            var special = '',
+                index   = 0;
+            if (this.piece) {
+              game.View.removePiece(this.name);
+              special = 'capture';
+            }
+
+            // Set piece
             this.piece = piece;
 
+            if (!init) {
+              // Get new attacks
+              this.attacks = getAttacks(this);
+              game.View.recordMove(piece, this.name, special);
+            }
             game.View.setPiece(piece, this.name);
           },
           removePiece: function () {
@@ -193,20 +303,27 @@ DSR.Chess = function () {
 
       initPieces: function () {
         var pieces  = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
-            x       = 0,
-            y       = 9,
+            x, y, square,
             piece   = {};
 
-        for (; x < 8; x++) {
+        for (x = 0; x < 8; x++) {
           for (y = 9; y > 5; y--) {
             piece = {
               color:  (y < 8),
               type:   (y % 3) ? pieces[x] : 'p'
             };
-            this.board[x][y % 8].setPiece(piece);
+            this.board[x][y % 8].setPiece(piece, 1);
             if (piece.type == 'k' || piece.type == 'r') {
               this.board[x][y % 8].castle = 1;
             }
+          }
+        }
+
+        // After all pieces are placed, check attacks
+        for (x = 0; x < 8; x++) {
+          for (y = 9; y > 5; y--) {
+            square = this.board[x][y % 8];
+            square.attacks = getAttacks(square);
           }
         }
       },
@@ -230,11 +347,11 @@ DSR.Chess = function () {
           y,
           html = '<ul class="board">';
 
-        for (; x; x--) {
+        while(x--) {
           html += '<li class="row"><ul>';
           for (y = 0; y < 8; y++) {
             color = ((y + x % 2) % 2) ? 'black' : 'white';
-            html += '<li id="' + String.fromCharCode(y + 97) + x + '" class="' + color + '"></li>'
+            html += '<li id="' + positionToName({x: y, y: x}) + '"></li>';
           }
           html += '</ul></li>';
         }
@@ -242,6 +359,8 @@ DSR.Chess = function () {
         html += '</ul>';
 
         $('body').append(html);
+
+        fireViewComplete();
       },
 
       setPiece: function (piece, square) {
@@ -251,25 +370,18 @@ DSR.Chess = function () {
       },
 
       removePiece: function (from) {
-        var el      = $('#' + from),
-            classes = el.attr('class').split(/\s+/),
-            index   = 0;
-
-          classes.shift();
-
-          for (; index < classes.length; index++) {
-            el.removeClass(classes[index]);
-          }
-
-        return {type: classes.pop(), color: classes.pop()};
+        $('#' + from).removeClass();
       },
 
-      movePiece: function (from, to) {
-        this.setPiece(this.removePiece(from), to);
-      },
-
-      recordMove: function (piece, to) {
-        var move = (piece.type == 'p' ? '' : piece.type.toUpperCase()) + to;
+      recordMove: function (piece, to, special) {
+        var move = (piece.type == 'p' ? '' : piece.type.toUpperCase());
+        if (special == 'capture') {
+          move += 'x';
+        }
+        move += to;
+        if (special == 'check') {
+          move += '!';
+        }
         $(piece.color ? '#blackmoves' : '#whitemoves').append('<li>' + move + '</li>');
       },
 
@@ -328,9 +440,7 @@ DSR.Chess = function () {
   };
 
   // Wait until view has been drawn before initiating the model
-  $(document).bind('DOMSubtreeModified',function(evt){
-    game.Model.init();
-  });
+  subscribeViewComplete(game.Model.init.bind(game.Model));
 
   game.View.init();
   game.Controller.beginTurn();

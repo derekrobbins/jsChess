@@ -4,12 +4,32 @@
 		"selected_items":
 		[
 			[
-				"squ",
-				"squareToPosition"
+				"remove",
+				"removeData"
+			],
+			[
+				"rook",
+				"rookSquare"
+			],
+			[
+				"en",
+				"enpassant"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"nam",
+				"nameToPosition"
 			],
 			[
 				"class",
-				"classes"
+				"class"
+			],
+			[
+				"squ",
+				"squareToPosition"
 			],
 			[
 				"lis",
@@ -103,7 +123,7 @@
 			"file": "rework.js",
 			"settings":
 			{
-				"buffer_size": 9183,
+				"buffer_size": 9767,
 				"line_ending": "Unix"
 			}
 		},
@@ -119,7 +139,7 @@
 			"file": "/Users/derek/Sites/jsChess/chess.html",
 			"settings":
 			{
-				"buffer_size": 550,
+				"buffer_size": 684,
 				"line_ending": "Unix"
 			}
 		},
@@ -135,7 +155,15 @@
 			"file": "/Users/derek/Sites/jsChess/css/chess.css",
 			"settings":
 			{
-				"buffer_size": 1189,
+				"buffer_size": 2342,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "view.js",
+			"settings":
+			{
+				"buffer_size": 676,
 				"line_ending": "Unix"
 			}
 		}
@@ -324,6 +352,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"movepiece",
+			"subscribe",
+			"removepiece",
+			"^",
+			"removepiece",
+			"type",
+			"nametoposition",
+			"pos2",
+			"board",
+			"enpassan",
+			"enpass",
+			"emptybetwe",
+			"?",
+			"setpiece",
+			".setpiece",
+			"setpiece",
 			"class",
 			"console",
 			"split",
@@ -435,23 +479,7 @@
 			"$competition",
 			"<fb:comments",
 			"campaigns/fifty",
-			"competition",
-			"url",
-			"canonical_url",
-			"$performer",
-			"<fb",
-			"<fb:comments",
-			"fb:",
-			"$performer",
-			"<fb:comments",
-			"<fb::comments",
-			"message_only",
-			"{message_only}",
-			"facebook",
-			"sub cache",
-			"sub list_facebook_comments",
-			"facebook",
-			"facepile"
+			"competition"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -479,15 +507,15 @@
 					"file": "rework.js",
 					"settings":
 					{
-						"buffer_size": 9183,
+						"buffer_size": 9767,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7781,
-								7781
+								5439,
+								5439
 							]
 						],
 						"settings":
@@ -497,7 +525,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3627.0,
+						"translation.y": 867.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -514,8 +542,8 @@
 						"selection":
 						[
 							[
-								4720,
-								4720
+								751,
+								751
 							]
 						],
 						"settings":
@@ -524,7 +552,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3246.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -534,20 +562,22 @@
 					"file": "/Users/derek/Sites/jsChess/chess.html",
 					"settings":
 					{
-						"buffer_size": 550,
+						"buffer_size": 684,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								325,
-								325
+								519,
+								519
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -567,8 +597,8 @@
 						"selection":
 						[
 							[
-								361,
-								244
+								667,
+								570
 							]
 						],
 						"settings":
@@ -587,15 +617,15 @@
 					"file": "/Users/derek/Sites/jsChess/css/chess.css",
 					"settings":
 					{
-						"buffer_size": 1189,
+						"buffer_size": 2342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								571,
-								571
+								575,
+								575
 							]
 						],
 						"settings":
@@ -604,7 +634,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 763.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "view.js",
+					"settings":
+					{
+						"buffer_size": 676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								655,
+								609
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
